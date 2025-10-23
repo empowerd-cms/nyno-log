@@ -33,8 +33,9 @@ if (!pgClient) {
 
   if(!pgClient) throw new Error('Postgres client failed to initialize');
 
-export default async function nyno_log(args, context) {
+export async function nyno_log(args, context) {
   const logJson = args[0]; // assume JSON string
+	console.log({logJson});
   // Insert the JSON log into queue_logs
   await pgClient.query(
     'INSERT INTO queue_logs(line) VALUES ($1::jsonb)',
